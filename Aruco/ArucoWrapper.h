@@ -34,6 +34,17 @@ ArucoPreviewRotationType extern const ArucoPreviewRotationTypeCw270;
 @property float poseRX;
 @property float poseRY;
 @property float poseRZ;
+@property float eyeX;
+@property float eyeY;
+@property float eyeZ;
+@property float dirX;
+@property float dirY;
+@property float dirZ;
+@property float upX;
+@property float upY;
+@property float upZ;
+
+
 @end
 
 @interface ArucoDetector: NSObject

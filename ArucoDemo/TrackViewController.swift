@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import SwiftSocket
 
 class TrackViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
@@ -18,9 +19,14 @@ class TrackViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     private var captureSession: AVCaptureSession?
     private var device: AVCaptureDevice?
     private var arucoTracker: ArucoTracker?
-
+    
+    let host = "192.168.1.76"
+    let port = 8085
+    var client: UDPClient?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        client = UDPClient(address: host, port: Int32(port))
         setupRotatedBar()
     }
 
@@ -105,6 +111,19 @@ extension TrackViewController: ArucoTrackerDelegate {
     func arucoTracker(_ tracker: ArucoTracker, didDetect markers: [ArucoMarker], preview: UIImage?) {
         DispatchQueue.main.async { [unowned self] in
             self.camView.image = preview
+            if let marker = markers.first {
+                let str = String(format: "%f, %f, %f, %f, %f, %f, %f, %f, %f",
+                                 marker.eyeX,
+                                 marker.eyeY,
+                                 marker.eyeZ,
+                                 marker.dirX,
+                                 marker.dirY,
+                                 marker.dirZ,
+                                 marker.upX,
+                                 marker.upY,
+                                 marker.upZ)
+                self.client?.send(string: str)
+            }
         }
     }
 }

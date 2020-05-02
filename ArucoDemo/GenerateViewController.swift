@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIScreenExtension
 
 class GenerateViewController: UIViewController {
 

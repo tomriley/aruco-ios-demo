@@ -10,6 +10,10 @@ Aruco/3rdparty/
 Pods/
 Podfile.lock
 
+## Carthage
+Carthage/
+
+
 ## Third-party libraries
 Frameworks/
 

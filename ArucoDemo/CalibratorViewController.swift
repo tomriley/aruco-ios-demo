@@ -118,7 +118,7 @@ class CalibratorViewController: UIViewController, AVCaptureVideoDataOutputSample
         calibrator.patternWidth = 9
         calibrator.patternHeight = 6
         calibrator.undistortImage = false
-        calibrator.squareSize = 1.8e-2
+        calibrator.squareSize = 0.0255
     }
 
     func setupSession() {
